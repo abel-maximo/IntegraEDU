@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | IntegraEDU</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-body">
+<section class="auth-layout">
+    <div class="auth-panel">
+        <p class="eyebrow">Acesso ao portal</p>
+        <h1>Entrar no IntegraEDU</h1>
+        <p>Use uma conta verificada para acessar agenda, mensagens, alunos e reunioes.</p>
+        <div class="demo-box">
+            <strong>Contas de demonstracao</strong>
+            <p>Responsavel: mariana@integraedu.com / 123456</p>
+            <p>Professor: lucas@integraedu.com / 123456</p>
+        </div>
+    </div>
+    <form class="auth-card" th:action="@{/login}" th:object="${loginForm}" method="post">
+        <div th:if="${erro}" class="alert error" th:text="${erro}"></div>
+        <div th:if="${sucesso}" class="alert success" th:text="${sucesso}"></div>
+        <label>E-mail
+            <input type="email" th:field="*{email}" placeholder="voce@exemplo.com">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+        <label>Senha
+            <input type="password" th:field="*{senha}" placeholder="Digite sua senha">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></p>
+        <button class="button primary full" type="submit">Entrar</button>
+        <div class="auth-links">
+            <a th:href="@{/cadastro/responsavel}">Novo responsavel</a>
+            <a th:href="@{/cadastro/professor}">Novo professor</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>

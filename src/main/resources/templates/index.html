@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntegraEDU</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="landing-body">
+<header class="topbar">
+    <div class="brand-block">
+        <span class="brand-mark">IE</span>
+        <div>
+            <p class="eyebrow">Projeto Integrador de Extensao</p>
+            <h1>IntegraEDU</h1>
+        </div>
+    </div>
+    <nav class="topnav">
+        <a href="#solucao">Solucao</a>
+        <a href="#modulos">Modulos</a>
+        <a href="#contato">Integracao</a>
+        <a class="button ghost" th:href="@{/login}">Entrar</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Escola, familia e estudantes no mesmo fluxo</p>
+            <h2>Uma plataforma em portugues para a rotina da educacao infantil.</h2>
+            <p class="lead">
+                O IntegraEDU conecta pais, professores e estudantes com agenda diaria, mensagens,
+                acompanhamento de progresso, desafios, humor e reunioes online em um portal unico.
+            </p>
+            <div class="hero-actions">
+                <a class="button primary" th:href="@{/cadastro/responsavel}">Cadastrar responsavel</a>
+                <a class="button secondary" th:href="@{/cadastro/professor}">Cadastrar professor</a>
+            </div>
+            <div class="hero-stats">
+                <article>
+                    <strong th:text="${totalResponsaveis}">0</strong>
+                    <span>familias conectadas</span>
+                </article>
+                <article>
+                    <strong th:text="${totalProfessores}">0</strong>
+                    <span>educadores ativos</span>
+                </article>
+                <article>
+                    <strong th:text="${#lists.size(alunos)}">0</strong>
+                    <span>alunos acompanhados</span>
+                </article>
+            </div>
+        </div>
+        <aside class="hero-panel">
+            <div class="panel-card gradient">
+                <p class="panel-label">Agenda de hoje</p>
+                <h3>Sofia chegou feliz, participou da leitura e concluiu o desafio das cores.</h3>
+                <ul>
+                    <li>Registro de humor em tempo real</li>
+                    <li>Mensagem direta para a familia</li>
+                    <li>Acompanhamento pedagogico visivel</li>
+                </ul>
+            </div>
+            <div class="floating-card">
+                <span>Proxima reuniao online</span>
+                <strong th:text="${reunioes[0].data + ' - ' + reunioes[0].horario}">24/03/2026 - 19:00</strong>
+                <p th:text="${reunioes[0].titulo}">Reuniao</p>
+            </div>
+        </aside>
+    </section>
+
+    <section class="section-grid" id="solucao">
+        <article class="info-card warm">
+            <p class="eyebrow">Agenda diaria</p>
+            <h3>Rotina detalhada por horario</h3>
+            <p>Entrada, atividades, lanche, desafios e observacoes ficam visiveis para a familia e para a equipe.</p>
+        </article>
+        <article class="info-card sky">
+            <p class="eyebrow">Mensagens</p>
+            <h3>Comunicacao organizada</h3>
+            <p>Recados institucionais, conversas com responsaveis e orientacoes pedagogicas no mesmo lugar.</p>
+        </article>
+        <article class="info-card green">
+            <p class="eyebrow">Humor e progresso</p>
+            <h3>Desenvolvimento observado com contexto</h3>
+            <p>Indicadores claros de autonomia, interacao social, comunicacao e necessidades de apoio.</p>
+        </article>
+    </section>
+
+    <section class="modules" id="modulos">
+        <div class="section-heading">
+            <p class="eyebrow">Funcionalidades</p>
+            <h2>Telas planejadas para a extensao IntegraEDU</h2>
+        </div>
+        <div class="module-grid">
+            <article>
+                <h3>Cadastro separado</h3>
+                <p>Fluxos individuais para pais e professores com verificacao de e-mail antes do acesso.</p>
+            </article>
+            <article>
+                <h3>Visualizacao de estudantes</h3>
+                <p>Lista de alunos, perfil individual, humor atual, progresso semanal e desafios do dia.</p>
+            </article>
+            <article>
+                <h3>Desafios e acolhimento</h3>
+                <p>Registro de pontos de atencao e sugestoes de apoio para manter o alinhamento casa-escola.</p>
+            </article>
+            <article>
+                <h3>Reunioes integradas</h3>
+                <p>Acesso rapido a encontros online com pauta, data, horario e link pronto para entrar.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="students-strip">
+        <div class="section-heading">
+            <p class="eyebrow">Visao de acompanhamento</p>
+            <h2>Exemplo de estudantes cadastrados</h2>
+        </div>
+        <div class="student-grid">
+            <article class="student-card" th:each="aluno : ${alunos}">
+                <span class="avatar" th:text="${#strings.substring(aluno.nome,0,1)}">A</span>
+                <h3 th:text="${aluno.nome}">Aluno</h3>
+                <p th:text="${aluno.turma}">Turma</p>
+                <strong th:text="${aluno.humorAtual}">Humor</strong>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" id="contato">
+    <p>IntegraEDU em portugues do Brasil para aproximar familia, educadores e estudantes.</p>
+    <a class="button ghost" th:href="@{/dashboard}">Abrir demonstracao</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens | IntegraEDU</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="portal-body">
+<header class="portal-header">
+    <div>
+        <p class="eyebrow">Comunicacao centralizada</p>
+        <h1>Mensagens para pais, professores e estudantes</h1>
+    </div>
+    <nav class="portal-nav">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/alunos}">Estudantes</a>
+        <a th:href="@{/mensagens}" class="active">Mensagens</a>
+        <a th:href="@{/reunioes}">Reunioes</a>
+        <a th:href="@{/logout}">Sair</a>
+    </nav>
+</header>
+
+<main class="portal-main">
+    <section class="message-board">
+        <article class="message-card expanded" th:each="mensagem : ${mensagens}">
+            <div class="message-header">
+                <div>
+                    <p class="message-meta" th:text="${mensagem.canal}">Canal</p>
+                    <h2 th:text="${mensagem.assunto}">Assunto</h2>
+                </div>
+                <span th:text="${mensagem.horario}">Hoje</span>
+            </div>
+            <p><strong th:text="${mensagem.remetente}">Remetente</strong> para <strong th:text="${mensagem.destinatario}">Destinatario</strong></p>
+            <p th:text="${mensagem.conteudo}">Conteudo</p>
+        </article>
+    </section>
+</main>
+</body>
+</html>

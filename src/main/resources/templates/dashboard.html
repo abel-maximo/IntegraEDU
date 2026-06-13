@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | IntegraEDU</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="portal-body">
+<header class="portal-header">
+    <div>
+        <p class="eyebrow">Portal IntegraEDU</p>
+        <h1>Ola, <span th:text="${usuario.nome}">Usuario</span></h1>
+    </div>
+    <nav class="portal-nav">
+        <a th:href="@{/dashboard}" class="active">Dashboard</a>
+        <a th:href="@{/alunos}">Estudantes</a>
+        <a th:href="@{/mensagens}">Mensagens</a>
+        <a th:href="@{/reunioes}">Reunioes</a>
+        <a th:href="@{/logout}">Sair</a>
+    </nav>
+</header>
+
+<main class="portal-main">
+    <section class="summary-grid">
+        <article class="summary-card spotlight">
+            <span>Perfil conectado</span>
+            <strong th:text="${usuario.perfil}">RESPONSAVEL</strong>
+            <p th:text="${usuario.areaAtuacao}">Area</p>
+        </article>
+        <article class="summary-card">
+            <span>Estudantes</span>
+            <strong th:text="${#lists.size(alunos)}">0</strong>
+            <p>com rotina compartilhada</p>
+        </article>
+        <article class="summary-card">
+            <span>Mensagens recentes</span>
+            <strong th:text="${#lists.size(mensagens)}">0</strong>
+            <p>para leitura rapida</p>
+        </article>
+        <article class="summary-card">
+            <span>Reunioes online</span>
+            <strong th:text="${#lists.size(reunioes)}">0</strong>
+            <p>agendadas no portal</p>
+        </article>
+    </section>
+
+    <section class="dashboard-grid">
+        <article class="board-card">
+            <div class="card-heading">
+                <h2>Agenda e humor dos estudantes</h2>
+                <a th:href="@{/alunos}">Abrir acompanhamento</a>
+            </div>
+            <div class="student-list">
+                <div class="student-line" th:each="aluno : ${alunos}">
+                    <div>
+                        <strong th:text="${aluno.nome}">Aluno</strong>
+                        <p th:text="${aluno.resumoDia}">Resumo</p>
+                    </div>
+                    <span class="tag" th:text="${aluno.humorAtual}">Humor</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="board-card">
+            <div class="card-heading">
+                <h2>Mensagens da comunidade escolar</h2>
+                <a th:href="@{/mensagens}">Ver todas</a>
+            </div>
+            <div class="message-stack">
+                <div class="message-card" th:each="mensagem : ${mensagens}">
+                    <p class="message-meta" th:text="${mensagem.canal + ' - ' + mensagem.horario}">Canal</p>
+                    <strong th:text="${mensagem.assunto}">Assunto</strong>
+                    <p th:text="${mensagem.conteudo}">Conteudo</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="meet-section">
+        <div class="section-heading">
+            <p class="eyebrow">Reunioes integradas</p>
+            <h2>Entradas rapidas para encontros online</h2>
+        </div>
+        <div class="meeting-grid">
+            <article class="meeting-card" th:each="reuniao : ${reunioes}">
+                <span th:text="${reuniao.data + ' - ' + reuniao.horario}">Data</span>
+                <h3 th:text="${reuniao.titulo}">Titulo</h3>
+                <p th:text="${reuniao.pauta}">Pauta</p>
+                <a class="button secondary small" th:href="${reuniao.link}" target="_blank">Entrar na reuniao</a>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

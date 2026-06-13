@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${perfil == 'professor' ? 'Cadastro de professor' : 'Cadastro de responsavel'}">Cadastro</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-body">
+<section class="auth-layout">
+    <div class="auth-panel">
+        <p class="eyebrow">Cadastro com verificacao</p>
+        <h1 th:text="${perfil == 'professor' ? 'Criar conta de professor' : 'Criar conta de responsavel'}">Criar conta</h1>
+        <p th:text="${perfil == 'professor'
+                ? 'Professores entram com area de atuacao e recebem um codigo de validacao por e-mail.'
+                : 'Familias criam o cadastro e validam o e-mail antes de acompanhar os estudantes.'}">
+            Fluxo de cadastro
+        </p>
+    </div>
+    <form class="auth-card" th:action="${actionPath}" th:object="${cadastroForm}" method="post">
+        <label>Nome completo
+            <input type="text" th:field="*{nome}" placeholder="Nome e sobrenome">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
+
+        <label>E-mail
+            <input type="email" th:field="*{email}" placeholder="voce@exemplo.com">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+        <label>Telefone
+            <input type="text" th:field="*{telefone}" placeholder="(00) 90000-0000">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></p>
+
+        <label th:if="${perfil == 'professor'}">Area de atuacao
+            <input type="text" th:field="*{areaAtuacao}" placeholder="Educacao infantil, coordenacao, apoio...">
+        </label>
+
+        <label>Senha
+            <input type="password" th:field="*{senha}" placeholder="Minimo de 6 caracteres">
+        </label>
+        <p class="field-error" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></p>
+
+        <button class="button primary full" type="submit">Cadastrar e gerar codigo</button>
+        <a class="button ghost full center" th:href="@{/login}">Voltar para o login</a>
+    </form>
+</section>
+</body>
+</html>

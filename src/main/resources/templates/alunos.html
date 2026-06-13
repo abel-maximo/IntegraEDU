@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudantes | IntegraEDU</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="portal-body">
+<header class="portal-header">
+    <div>
+        <p class="eyebrow">Visao do estudante</p>
+        <h1>Cadastro e acompanhamento</h1>
+    </div>
+    <nav class="portal-nav">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/alunos}" class="active">Estudantes</a>
+        <a th:href="@{/mensagens}">Mensagens</a>
+        <a th:href="@{/reunioes}">Reunioes</a>
+        <a th:href="@{/logout}">Sair</a>
+    </nav>
+</header>
+
+<main class="portal-main split-layout">
+    <aside class="sidebar-card">
+        <h2>Estudantes cadastrados</h2>
+        <a class="student-nav" th:each="aluno : ${alunos}" th:href="@{'/alunos/' + ${aluno.id}}">
+            <strong th:text="${aluno.nome}">Nome</strong>
+            <span th:text="${aluno.turma}">Turma</span>
+        </a>
+    </aside>
+
+    <section class="detail-card" th:if="${alunoSelecionado != null}">
+        <div class="detail-hero">
+            <div>
+                <p class="eyebrow">Perfil do estudante</p>
+                <h2 th:text="${alunoSelecionado.nome}">Nome</h2>
+                <p th:text="${alunoSelecionado.idade + ' anos - ' + alunoSelecionado.turma}">Dados</p>
+                <p th:text="${'Responsavel principal: ' + alunoSelecionado.responsavel}">Responsavel</p>
+            </div>
+            <span class="tag large" th:text="${alunoSelecionado.humorAtual}">Humor</span>
+        </div>
+
+        <div class="section-heading compact">
+            <p class="eyebrow">Resumo</p>
+            <h3 th:text="${alunoSelecionado.resumoDia}">Resumo do dia</h3>
+        </div>
+
+        <div class="detail-grid">
+            <article class="board-card">
+                <div class="card-heading">
+                    <h3>Agenda diaria</h3>
+                    <span>Hoje</span>
+                </div>
+                <div class="agenda-line" th:each="item : ${alunoSelecionado.agenda}">
+                    <strong th:text="${item.horario}">07:30</strong>
+                    <div>
+                        <p th:text="${item.titulo}">Titulo</p>
+                        <span th:text="${item.descricao}">Descricao</span>
+                    </div>
+                    <em th:text="${item.tipo}">Tipo</em>
+                </div>
+            </article>
+
+            <article class="board-card">
+                <div class="card-heading">
+                    <h3>Progresso</h3>
+                    <span>Semanal</span>
+                </div>
+                <div class="progress-item" th:each="item : ${alunoSelecionado.progresso}">
+                    <div class="progress-labels">
+                        <strong th:text="${item.indicador}">Indicador</strong>
+                        <span th:text="${item.destaque}">Destaque</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div th:style="'width:' + ${item.percentual} + '%'"></div>
+                    </div>
+                    <p th:text="${item.descricao}">Descricao</p>
+                </div>
+            </article>
+        </div>
+
+        <article class="board-card">
+            <div class="card-heading">
+                <h3>Desafios e estrategias de apoio</h3>
+                <span>Compartilhado com a familia</span>
+            </div>
+            <div class="challenge-grid">
+                <div class="challenge-card" th:each="desafio : ${alunoSelecionado.desafios}">
+                    <h4 th:text="${desafio.titulo}">Titulo</h4>
+                    <p th:text="${desafio.descricao}">Descricao</p>
+                    <strong th:text="${desafio.apoioSugerido}">Apoio</strong>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+</body>
+</html>
