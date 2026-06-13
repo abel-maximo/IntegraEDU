@@ -9,8 +9,8 @@
 <body class="portal-body">
 <header class="portal-header">
     <div>
-        <p class="eyebrow">Encontros online</p>
-        <h1>Reunioes integradas com acesso rapido</h1>
+        <p class="eyebrow">Organizacao com a familia</p>
+        <h1>Reunioes agendadas e escolha de nova data</h1>
     </div>
     <nav class="portal-nav">
         <a th:href="@{/dashboard}">Dashboard</a>
@@ -28,6 +28,7 @@
             <h2 th:text="${reuniao.titulo}">Titulo</h2>
             <p th:text="${'Participante principal: ' + reuniao.participantePrincipal}">Participante</p>
             <p th:text="${reuniao.pauta}">Pauta</p>
+            <p class="muted" th:text="${reuniao.alternativa}">Alternativa</p>
             <div class="meeting-actions">
                 <a class="button primary small" th:href="${reuniao.link}" target="_blank">Entrar na reuniao</a>
                 <span th:text="${reuniao.link}">Link</span>

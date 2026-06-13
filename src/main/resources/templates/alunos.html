@@ -9,8 +9,8 @@
 <body class="portal-body">
 <header class="portal-header">
     <div>
-        <p class="eyebrow">Visao do estudante</p>
-        <h1>Cadastro e acompanhamento</h1>
+        <p class="eyebrow">Ensino infantil</p>
+        <h1>Agenda, rotina e comunicados</h1>
     </div>
     <nav class="portal-nav">
         <a th:href="@{/dashboard}">Dashboard</a>
@@ -38,7 +38,7 @@
                 <p th:text="${alunoSelecionado.idade + ' anos - ' + alunoSelecionado.turma}">Dados</p>
                 <p th:text="${'Responsavel principal: ' + alunoSelecionado.responsavel}">Responsavel</p>
             </div>
-            <span class="tag large" th:text="${alunoSelecionado.humorAtual}">Humor</span>
+            <span class="tag large" th:text="${alunoSelecionado.humorAtual}">Comportamento</span>
         </div>
 
         <div class="section-heading compact">
@@ -62,10 +62,10 @@
                 </div>
             </article>
 
-            <article class="board-card">
+            <article class="board-card" th:if="${usuario.perfil.name() == 'PROFESSOR'}">
                 <div class="card-heading">
-                    <h3>Progresso</h3>
-                    <span>Semanal</span>
+                    <h3>Trabalhos, tarefas e progresso</h3>
+                    <span>Acesso do professor</span>
                 </div>
                 <div class="progress-item" th:each="item : ${alunoSelecionado.progresso}">
                     <div class="progress-labels">
@@ -80,10 +80,10 @@
             </article>
         </div>
 
-        <article class="board-card">
+        <article class="board-card" th:if="${usuario.perfil.name() == 'PROFESSOR'}">
             <div class="card-heading">
-                <h3>Desafios e estrategias de apoio</h3>
-                <span>Compartilhado com a familia</span>
+                <h3>Parte comportamental</h3>
+                <span>Instituicao e professor</span>
             </div>
             <div class="challenge-grid">
                 <div class="challenge-card" th:each="desafio : ${alunoSelecionado.desafios}">
@@ -92,6 +92,17 @@
                     <strong th:text="${desafio.apoioSugerido}">Apoio</strong>
                 </div>
             </div>
+        </article>
+
+        <article class="board-card" th:if="${usuario.perfil.name() == 'RESPONSAVEL'}">
+            <div class="card-heading">
+                <h3>Observacao para a familia</h3>
+                <span>Quando solicitado</span>
+            </div>
+            <p>
+                Trabalhos, tarefas, progresso semanal e parte comportamental completa ficam restritos ao professor
+                e a instituicao. Os pais recebem comunicados quando houver necessidade de acompanhamento familiar.
+            </p>
         </article>
     </section>
 </main>

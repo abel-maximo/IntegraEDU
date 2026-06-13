@@ -9,7 +9,7 @@
 <body class="portal-body">
 <header class="portal-header">
     <div>
-        <p class="eyebrow">Portal IntegraEDU</p>
+        <p class="eyebrow">Front dos pais - ensino infantil</p>
         <h1>Ola, <span th:text="${usuario.nome}">Usuario</span></h1>
     </div>
     <nav class="portal-nav">
@@ -29,17 +29,17 @@
             <p th:text="${usuario.areaAtuacao}">Area</p>
         </article>
         <article class="summary-card">
-            <span>Estudantes</span>
+            <span>Filhos acompanhados</span>
             <strong th:text="${#lists.size(alunos)}">0</strong>
             <p>com rotina compartilhada</p>
         </article>
         <article class="summary-card">
-            <span>Mensagens recentes</span>
+            <span>Mensagens</span>
             <strong th:text="${#lists.size(mensagens)}">0</strong>
             <p>para leitura rapida</p>
         </article>
         <article class="summary-card">
-            <span>Reunioes online</span>
+            <span>Reunioes</span>
             <strong th:text="${#lists.size(reunioes)}">0</strong>
             <p>agendadas no portal</p>
         </article>
@@ -48,7 +48,7 @@
     <section class="dashboard-grid">
         <article class="board-card">
             <div class="card-heading">
-                <h2>Agenda e humor dos estudantes</h2>
+                <h2>Agenda e comportamento</h2>
                 <a th:href="@{/alunos}">Abrir acompanhamento</a>
             </div>
             <div class="student-list">
@@ -64,7 +64,7 @@
 
         <article class="board-card">
             <div class="card-heading">
-                <h2>Mensagens da comunidade escolar</h2>
+                <h2>Mensagens recentes</h2>
                 <a th:href="@{/mensagens}">Ver todas</a>
             </div>
             <div class="message-stack">
@@ -77,16 +77,53 @@
         </article>
     </section>
 
+    <section class="dashboard-grid">
+        <article class="board-card">
+            <div class="card-heading">
+                <h2>Avisos da instituicao</h2>
+                <span>Familia e escola</span>
+            </div>
+            <div class="message-stack">
+                <div class="notice-line" th:each="aviso : ${avisos}">
+                    <span class="tag" th:text="${aviso.prioridade}">Prioridade</span>
+                    <div>
+                        <strong th:text="${aviso.titulo}">Aviso</strong>
+                        <p th:text="${aviso.descricao}">Descricao</p>
+                        <small th:text="${aviso.data}">Data</small>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="board-card">
+            <div class="card-heading">
+                <h2>Datas especiais</h2>
+                <span>Agenda escolar</span>
+            </div>
+            <div class="message-stack">
+                <div class="notice-line" th:each="dataEspecial : ${datasEspeciais}">
+                    <span class="date-box" th:text="${dataEspecial.data}">22/03</span>
+                    <div>
+                        <strong th:text="${dataEspecial.titulo}">Data</strong>
+                        <p th:text="${dataEspecial.descricao}">Descricao</p>
+                        <small th:text="${dataEspecial.tipo}">Tipo</small>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
     <section class="meet-section">
         <div class="section-heading">
             <p class="eyebrow">Reunioes integradas</p>
-            <h2>Entradas rapidas para encontros online</h2>
+            <h2>Reunioes agendadas e alternativas de horario</h2>
         </div>
         <div class="meeting-grid">
             <article class="meeting-card" th:each="reuniao : ${reunioes}">
                 <span th:text="${reuniao.data + ' - ' + reuniao.horario}">Data</span>
                 <h3 th:text="${reuniao.titulo}">Titulo</h3>
                 <p th:text="${reuniao.pauta}">Pauta</p>
+                <p class="muted" th:text="${reuniao.alternativa}">Alternativa</p>
                 <a class="button secondary small" th:href="${reuniao.link}" target="_blank">Entrar na reuniao</a>
             </article>
         </div>

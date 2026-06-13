@@ -374,13 +374,15 @@ input {
 .student-list,
 .message-stack,
 .message-board,
-.challenge-grid {
+.challenge-grid,
+.policy-strip {
     display: grid;
     gap: 14px;
 }
 
 .student-line,
-.agenda-line {
+.agenda-line,
+.notice-line {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 14px;
@@ -389,7 +391,8 @@ input {
 }
 
 .student-line:last-child,
-.agenda-line:last-child {
+.agenda-line:last-child,
+.notice-line:last-child {
     border-bottom: 0;
 }
 
@@ -446,6 +449,33 @@ input {
     align-items: center;
 }
 
+.notice-line {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+}
+
+.notice-line p {
+    margin: 6px 0;
+}
+
+.notice-line small,
+.muted {
+    color: #657d92;
+}
+
+.date-box {
+    width: 74px;
+    min-height: 46px;
+    display: grid;
+    place-items: center;
+    padding: 8px;
+    border-radius: 14px;
+    background: #e7f6ef;
+    color: #245b45;
+    font-weight: 800;
+    text-align: center;
+}
+
 .agenda-line em {
     font-style: normal;
     color: #6c8195;
@@ -484,6 +514,18 @@ input {
     padding: 28px;
 }
 
+.policy-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 20px;
+}
+
+.policy-strip article {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.78);
+}
+
 .message-meta {
     color: #6d8194;
     margin: 0 0 8px;
@@ -512,7 +554,8 @@ input {
     .dashboard-grid,
     .detail-grid,
     .split-layout,
-    .summary-grid {
+    .summary-grid,
+    .policy-strip {
         grid-template-columns: 1fr;
     }
 

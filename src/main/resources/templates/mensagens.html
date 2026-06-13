@@ -9,8 +9,8 @@
 <body class="portal-body">
 <header class="portal-header">
     <div>
-        <p class="eyebrow">Comunicacao centralizada</p>
-        <h1>Mensagens para pais, professores e estudantes</h1>
+        <p class="eyebrow">Comunicacao familia-escola</p>
+        <h1>Mensagens, desenvolvimento e autorizacoes</h1>
     </div>
     <nav class="portal-nav">
         <a th:href="@{/dashboard}">Dashboard</a>
@@ -22,6 +22,20 @@
 </header>
 
 <main class="portal-main">
+    <section class="policy-strip">
+        <article>
+            <strong>Desenvolvimento do aluno</strong>
+            <p>Professores podem enviar informacoes aos pais quando houver pontos relevantes para acompanhamento.</p>
+        </article>
+        <article>
+            <strong>Profissionais de saude</strong>
+            <p>Relatorios so ficam disponiveis mediante autorizacao dos pais e da instituicao.</p>
+        </article>
+        <article>
+            <strong>Proxima versao</strong>
+            <p>Questionarios para escola e professores serao adicionados em uma etapa futura.</p>
+        </article>
+    </section>
     <section class="message-board">
         <article class="message-card expanded" th:each="mensagem : ${mensagens}">
             <div class="message-header">

@@ -38,6 +38,8 @@ public class WebController {
 		model.addAttribute("totalResponsaveis", portalService.totalResponsaveis());
 		model.addAttribute("totalProfessores", portalService.totalProfessores());
 		model.addAttribute("reunioes", portalService.listarReunioes());
+		model.addAttribute("avisos", portalService.listarAvisos());
+		model.addAttribute("datasEspeciais", portalService.listarDatasEspeciais());
 		return "index";
 	}
 
@@ -145,6 +147,8 @@ public class WebController {
 		model.addAttribute("alunos", portalService.listarAlunos());
 		model.addAttribute("mensagens", portalService.listarMensagens().stream().limit(3).toList());
 		model.addAttribute("reunioes", portalService.listarReunioes());
+		model.addAttribute("avisos", portalService.listarAvisos());
+		model.addAttribute("datasEspeciais", portalService.listarDatasEspeciais());
 		return "dashboard";
 	}
 
